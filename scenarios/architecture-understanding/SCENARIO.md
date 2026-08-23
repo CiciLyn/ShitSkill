@@ -1,0 +1,189 @@
+# Architecture Understanding Scenario
+
+## Trigger
+
+Use this scenario when the human needs to understand a system's boundaries,
+components, responsibilities, interactions, invariants, or design tradeoffs.
+
+Route to `repo-understanding` when the primary outcome is navigating one
+repository's concrete structure. Route to `module-development` when the human
+asks to implement an architectural change.
+
+## Goal
+
+Build an evidence-backed model of why the system is divided as it is, how its
+parts collaborate on important flows, and what constraints and tradeoffs govern
+change.
+
+## Imports
+
+Read and apply these modules in workflow order:
+
+1. [`better-understanding`](../../modules/better-understanding/MODULE.md)
+2. [`top-down`](../../modules/top-down/MODULE.md)
+3. [`path-navigation`](../../modules/path-navigation/MODULE.md)
+4. [`causal-reasoning`](../../modules/causal-reasoning/MODULE.md)
+5. [`better-explanation`](../../modules/better-explanation/MODULE.md)
+
+Apply these rules:
+
+- [Context rules](../../rules/context-rules.md): Assume Limited Human Context,
+  Establish Context First, Progressive Disclosure.
+- [Navigation rules](../../rules/navigation-rules.md): Explain Non-Obvious
+  Transitions, Explain Why It Matters, Stay Goal-Relevant, Maintain Zoom
+  Coherence.
+- [Explanation rules](../../rules/explanation-rules.md): Introduce Terms In
+  Plain Language, Prefer Causal Relationships, Preserve Causal Order,
+  Distinguish Fact From Inference, Cite Original Evidence.
+
+## Inputs
+
+- The human's architectural question and desired decision.
+- System boundaries, actors, repositories, services, data stores, and external
+  dependencies.
+- Design documents, deployment configuration, runtime paths, APIs, schemas,
+  source, and operational evidence.
+- Quality attributes and constraints such as reliability, latency, consistency,
+  security, ownership, cost, and evolution.
+- Current version and known differences between intended and actual architecture.
+
+## Understanding Model
+
+Use `Structure`, `Responsibility`, and `Boundary` for the architectural frame.
+Add `Flow / sequence` for critical interactions, `State` for lifecycle or
+consistency questions, and `Causality` for constraints, tradeoffs, and failure
+propagation.
+
+## Workflow
+
+### 1. Define The Architectural Question
+
+Identify the decision the model must support: orientation, change planning,
+failure analysis, ownership, scaling, security, or tradeoff evaluation.
+
+State the system's purpose and choose the smallest boundary that contains the
+question.
+
+**Boundary gate:** do not inventory components until the architectural question
+and containing system boundary are explicit.
+
+### 2. Establish Sources And Confidence
+
+Rank evidence by authority and freshness. Compare intended architecture from
+design documents with actual architecture shown by deployment, configuration,
+interfaces, and runtime behavior.
+
+Mark disagreement rather than silently choosing one source.
+
+**Evidence gate:** architecture claims must be tied to intended-design evidence,
+actual-system evidence, or labeled inference before they enter the model.
+
+### 3. Apply Architecture Top-Down Levels
+
+Descend through these scenario-specific levels:
+
+```text
+system purpose and external actors
+  -> system boundary and environment
+  -> major components and ownership
+  -> responsibilities and contracts
+  -> critical interaction paths
+  -> state, data, and control transitions
+  -> invariants, quality attributes, and failure boundaries
+  -> implementation anchors
+```
+
+Select only levels and branches needed for the architectural question.
+
+### 4. Map Responsibilities And Boundaries
+
+For each relevant component, explain:
+
+- what responsibility it owns;
+- what it deliberately does not own;
+- its public contracts;
+- state or data under its control;
+- upstream and downstream dependencies.
+
+Do not infer responsibility from component names alone.
+
+### 5. Trace Critical Flows
+
+Choose representative user, data, control, deployment, or failure flows. Label
+each transition and explain why the next component participates.
+
+Show synchronous versus asynchronous boundaries, persistence points, trust
+boundaries, and ownership changes when relevant.
+
+### 6. Explain Architectural Causes And Tradeoffs
+
+Connect constraints to design decisions and consequences:
+
+```text
+constraint -> design decision -> gained property -> accepted cost or risk
+```
+
+Distinguish documented rationale from inferred rationale. Challenge claimed
+benefits against actual implementation evidence.
+
+### 7. Identify Invariants And Change Pressure
+
+State which contracts or properties must remain stable, where failures are
+contained or propagated, and which components are likely to change together.
+
+Identify implementation anchors only after the architectural model is clear.
+
+### 8. Synthesize The Model
+
+Reconnect components and flows to the original architectural question. Explain
+what the model supports confidently, where intended and actual architecture
+diverge, and which evidence would resolve remaining uncertainty.
+
+## Allowed Iteration
+
+- Runtime evidence may revise a document-derived component or flow.
+- A critical path may cross the initial boundary; expand it only enough to
+  explain the observed contract or consequence.
+- Revisit a component when a newly discovered invariant changes its role.
+- Do not enumerate every service, endpoint, or table unless the question
+  requires exhaustive inventory.
+
+## Stopping Conditions
+
+Complete when the human can:
+
+- state the system boundary and purpose;
+- assign relevant responsibilities to components;
+- trace the critical flows tied to the question;
+- explain important constraints, invariants, and tradeoffs;
+- identify evidence-backed implementation anchors and uncertainties.
+
+Stop as blocked when authoritative architecture or runtime evidence is
+inaccessible and competing system models cannot be reconciled.
+
+## Output Contract
+
+The final response must make recoverable:
+
+- the architectural question, system purpose, and chosen boundary;
+- relevant actors, components, responsibilities, and contracts;
+- critical flows with labeled transitions;
+- state, data, control, trust, or failure boundaries when material;
+- constraints, design decisions, benefits, costs, and risks;
+- important invariants and change coupling;
+- intended-versus-actual differences;
+- implementation anchors, evidence sources, and unresolved uncertainty.
+
+This is a content contract, not a fixed architecture document template.
+
+## Quality Gate
+
+Before finishing, confirm:
+
+1. the system boundary matches the question;
+2. responsibilities are supported by contracts or behavior;
+3. critical flows explain transitions and ownership changes;
+4. constraints are connected to design consequences;
+5. documented and inferred rationale are distinguishable;
+6. intended and actual architecture are not conflated;
+7. the human can reason about the impact of a relevant change using the model.
