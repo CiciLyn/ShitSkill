@@ -1,6 +1,6 @@
 ---
 name: "shit-skill"
-description: "Builds goal-oriented mental models for low-context humans. Invoke for code, review, debugging, development, document, or architecture tasks that need an explicit reasoning path."
+description: "Builds evidence-backed mental models. Invoke when users ask to understand or explain why/how code, a codebase, architecture, documents, failures, debugging evidence, or causal relationships work."
 ---
 
 # Shit Skill
