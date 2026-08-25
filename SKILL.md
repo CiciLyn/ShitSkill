@@ -70,8 +70,9 @@ Before finishing, check that the human can recover:
   execution boundaries to its observable effect;
 - what specialized terms do, what capability they control, and why they matter
   in the current path;
-- what each quantitative symbol and unit means, why the stated relationship
-  holds, and whether each condition is derived, evidence-backed, or assumed;
+- why any mathematical notation was necessary, what each term, symbol, and unit
+  means in plain language, where the relationship comes from, and why its
+  premises apply to the current case;
 - what evidence supports the conclusion;
 - which claims are proven by implementation, configuration, runtime evidence,
   documentation, or labeled inference;

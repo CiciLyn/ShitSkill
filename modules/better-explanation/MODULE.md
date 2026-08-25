@@ -88,112 +88,37 @@ changes which service a command reaches. Likewise, naming a device path or
 forwarding flag is not enough: explain what operation consumes it and what
 specific path becomes unavailable when it is absent or disabled.
 
-### 5. Make Quantitative Reasoning Mentally Executable
+### 5. Explain Mathematics Accessibly
 
-When a conclusion depends on an equation, statistical relation, threshold, or
-condition, explain the model before asking the human to interpret the notation.
-An equation is a compressed statement of a relationship, not an explanation of
-why that relationship holds.
+Assume the human may have little mathematical background. Keep precise
+mathematical terms when they are useful, but explain them in plain language at
+first use instead of replacing them or expecting prior familiarity.
 
-Build the explanation in this order:
+Use mathematics only when it makes the reasoning clearer. Prefer quantities
+already present in the problem, and do not introduce a new variable merely to
+make an explanation look formal.
 
-1. State the concrete quantity being explained and its unit.
-2. Identify one observation or experimental unit and what can vary between
-   observations.
-3. Define every symbol in plain language, including whether it is an observed
-   value, an estimate from available data, or an unknown population quantity.
-4. Explain the mechanism in words before presenting the equation.
-5. State the assumptions required for that mechanism and identify which step
-   uses each assumption.
-6. Give the equation, substitute concrete values when available, and interpret
-   the result in the original unit.
-7. State what the calculation supports, what it does not establish, and how the
-   conclusion changes when an assumption fails.
+When a new variable, equation, or mathematical condition is necessary:
 
-For an averaging example, establish the model before showing the relation:
+1. Start with the concrete question and the unit being measured.
+2. Introduce only the minimum symbols needed for that question.
+3. Define each symbol at first use in plain language and tie it to the concrete
+   thing it represents; distinguish observed values, estimates, and population
+   quantities when that distinction affects the conclusion.
+4. Show the formula or relationship that uses the symbol, explain each operation
+   or relationship in words, and say whether it comes from a definition,
+   derivation, empirical relationship, or approximation.
+5. State every assumption and precondition used by the formula. For each one,
+   explain what evidence makes it suitable for the current case. If that cannot
+   be established, label it as an assumption or unknown instead of presenting
+   it as fact.
+6. Substitute concrete values when available and interpret the result in the
+   original unit.
+7. State what the calculation supports and how the conclusion changes if a
+   premise does not hold.
 
-- `D_i` is the signed difference measured on observation `i`, such as one
-  case's score difference in score points;
-- `i` labels an observation, and `n` is the number of observations being
-  averaged;
-- `mu` is the unknown population mean of `D_i`: the long-run signed difference
-  expected across repeated observations;
-- `D_bar_n` is the sample-mean statistic produced from `n` observations; it
-  varies across repeated samples, and the number computed from the current data
-  is one observed realization in the same unit as `D_i`;
-- `SD(X)` means the standard deviation of quantity `X`: take each repeated
-  value's distance from the long-run mean, square those distances, average
-  them, and take the square root; the result has the same unit as `X`;
-- `sigma = SD(D_i)` is therefore the population standard deviation of one
-  observation, in score points in this example.
-
-Then explain the mechanism. Each observation has a residual `D_i - mu`, which
-is its positive or negative departure from the long-run mean. If observations
-are independent and have the same spread, those residuals do not move together.
-On the squared-spread scale, their contributions add: the sum of `n`
-observations has squared spread `n * sigma^2`. Forming an average divides the
-sum by `n`, so its squared spread is divided by `n^2`, leaving `sigma^2 / n`.
-Converting squared spread back to standard deviation gives `sigma / sqrt(n)`.
-Only after that explanation is the compact notation meaningful:
-
-```text
-D_bar_n = (D_1 + ... + D_n) / n
-SD(D_bar_n) = sigma / sqrt(n)
-```
-
-The equality is exact for independent observations with the same `sigma`.
-Under weak dependence or unequal but comparable spreads, `1 / sqrt(n)` may be
-only an approximation; positive correlation makes averaging reduce noise more
-slowly and is better described with a smaller effective sample size.
-
-Name assumptions narrowly instead of attaching them to the whole argument.
-Separate:
-
-- a mathematical consequence that follows once a model is accepted;
-- a modeling assumption such as independence or comparable variance;
-- an empirical condition claimed to hold in the current data;
-- a simplifying hypothesis used only to estimate an order of magnitude.
-
-Every phrase such as "when the mean is near zero", "assuming independence", or
-"for a sufficiently large sample" needs condition provenance:
-
-```text
-condition
-  -> precise meaning
-  -> evidence, derivation, or explicit assumption
-  -> step that requires it
-  -> consequence if it is false
-```
-
-Treat "the mean is near zero" as a separate empirical claim, not as a
-consequence of averaging. First define what "near" means in the original unit.
-For example, if differences smaller than `epsilon = 0.5` score points are
-operationally negligible, the claim is `abs(mu) <= epsilon`, where `mu` is the
-unknown population mean, not the observed `D_bar_n`.
-
-Then identify evidence for that claim. Relevant empirical support could be an
-uncertainty interval for `mu`, based on adequate independent observations, that
-lies entirely inside `[-epsilon, epsilon]`. A design or domain symmetry may
-justify using zero-centering as a modeling assumption, but it does not prove
-the actual `mu` is near zero. A single small `D_bar_n`, a roughly balanced win
-count, a large `n`, or a confidence interval that merely crosses zero does not
-establish that `mu` is near zero. If sufficient evidence is unavailable, state
-`abs(mu) <= epsilon` as an assumption and keep the conclusion conditional on
-it.
-
-Be exact about why a condition matters. The relation
-`SD(D_bar_n) = sigma / sqrt(n)` does not require `mu` to be zero: it describes
-spread around whatever `mu` is. A near-zero `mu` is needed only when that
-spread is being used as a proxy for the typical absolute observed gap from
-zero. If `abs(mu) > epsilon`, larger samples shrink random variation around
-`mu`, but the systematic gap remains.
-
-Use a concrete contrast when it resolves the abstraction. For example, if
-single-case differences have a spread of 10 points and no persistent signed
-direction, averaging 10 cases has a random scale of about `10 / sqrt(10) = 3.2`
-points, while averaging 100 cases has a scale of about 1 point. If one system
-instead has a persistent 4-point disadvantage, more cases narrow the noise
-around that disadvantage; they do not make the 4-point gap disappear.
+Do not treat notation, a named theorem, or a formula as a substitute for the
+plain-language explanation that lets the human reconstruct the reasoning.
 
 ### 6. Explain Relationships, Not Just Objects
 
