@@ -2,7 +2,7 @@
 
 ## Explain Non-Obvious Transitions
 
-Give a reason for every non-obvious transition between files, modules, functions, concepts, or abstraction levels.
+Give a reason and supported edge for every non-obvious transition between files, modules, functions, concepts, or abstraction levels, and trace concrete runtime behavior through indirection until its observable effect or relevant system boundary.
 
 ## Explain Why It Matters
 

@@ -35,9 +35,10 @@ Apply these rules:
 - [Navigation rules](../../rules/navigation-rules.md): Explain Non-Obvious
   Transitions, Explain Why It Matters, Stay Goal-Relevant, Maintain Zoom
   Coherence.
-- [Explanation rules](../../rules/explanation-rules.md): Prefer Causal
-  Relationships, Distinguish Fact From Inference, Cite Original Evidence,
-  Explain Change Before Action, Verify Before Claiming Success.
+- [Explanation rules](../../rules/explanation-rules.md): Make Quantitative
+  Reasoning Executable, Prefer Causal Relationships, Distinguish Fact From
+  Inference, Cite Original Evidence, Explain Change Before Action, Verify
+  Before Claiming Success.
 
 ## Inputs
 

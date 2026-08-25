@@ -31,8 +31,9 @@ Apply these rules:
   Transitions, Explain Why It Matters, Stay Goal-Relevant, Maintain Zoom
   Coherence.
 - [Explanation rules](../../rules/explanation-rules.md): Introduce Terms In
-  Plain Language, Prefer Causal Relationships, Preserve Causal Order,
-  Distinguish Fact From Inference, Cite Original Evidence.
+  Plain Language, Make Quantitative Reasoning Executable, Prefer Causal
+  Relationships, Preserve Causal Order, Distinguish Fact From Inference, Cite
+  Original Evidence.
 
 ## Inputs
 

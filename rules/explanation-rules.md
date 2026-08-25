@@ -2,7 +2,11 @@
 
 ## Introduce Terms In Plain Language
 
-Introduce an unfamiliar term in plain language before relying on its precise technical meaning.
+Before relying on an unfamiliar term, explain its plain-language role, precise mechanism, operational effect in the current path, and why that effect matters to the conclusion.
+
+## Make Quantitative Reasoning Executable
+
+Never use an equation or an unstated condition as its own explanation; define every quantity, symbol, and unit, including whether it is a population quantity, estimate, or observed value, explain the relationship in plain language before showing the equation, and identify whether each condition is derived, supported by evidence, or merely assumed where it is used.
 
 ## Prefer Causal Relationships
 
@@ -18,7 +22,7 @@ Clearly distinguish evidence-backed facts, reasoned inferences, and unresolved u
 
 ## Cite Original Evidence
 
-Always support every material claim with the original text or code and a precise source location, such as `path/to/file.py:L10-L18`.
+Always support every material claim with original text or code and a precise source location, place the smallest decisive verbatim excerpt next to concrete source-behavior claims at first use, and use available implementation, configuration, or runtime evidence rather than documentation alone to prove what a system does or does not do.
 
 ## Explain Change Before Action
 

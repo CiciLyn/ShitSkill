@@ -12,8 +12,9 @@ belong in `modules/`, while task-specific ordering belongs in `scenarios/`.
   progressive disclosure.
 - [Navigation rules](navigation-rules.md): transitions, importance, relevant
   scope, and coherent zoom levels.
-- [Explanation rules](explanation-rules.md): terminology, causality, evidence,
-  epistemic status, source citation, change intent, and verification.
+- [Explanation rules](explanation-rules.md): terminology, accessible
+  mathematics, causality, evidence, epistemic status, source citation, change
+  intent, and verification.
 
 ## Selection
 

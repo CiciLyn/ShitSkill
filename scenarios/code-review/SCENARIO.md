@@ -32,9 +32,10 @@ Apply these rules:
   Establish Context First, Progressive Disclosure.
 - [Navigation rules](../../rules/navigation-rules.md): Explain Non-Obvious
   Transitions, Explain Why It Matters, Stay Goal-Relevant.
-- [Explanation rules](../../rules/explanation-rules.md): Prefer Causal
-  Relationships, Preserve Causal Order, Distinguish Fact From Inference,
-  Cite Original Evidence, Verify Before Claiming Success.
+- [Explanation rules](../../rules/explanation-rules.md): Make Quantitative
+  Reasoning Executable, Prefer Causal Relationships, Preserve Causal Order,
+  Distinguish Fact From Inference, Cite Original Evidence, Verify Before
+  Claiming Success.
 
 ## Inputs
 

@@ -14,7 +14,8 @@ traced relationship is causal or decide the scenario's overall workflow.
 - A starting node supported by the observed task or evidence.
 - A goal-relevant map of candidate nodes and boundaries.
 - Available structural evidence such as calls, imports, references, data flow,
-  ownership, configuration, logs, or documentation links.
+  ownership, configuration, registration and lookup mechanisms, subprocess or
+  protocol boundaries, logs, or documentation links.
 - Scope and stopping conditions.
 
 ## Method
@@ -76,7 +77,42 @@ Question answered:
 Do not merely explain what the destination does. Explain why reaching it
 advances the current goal.
 
-### 5. Control Branching
+### 5. Complete Concrete Execution Paths
+
+When the claim concerns what code does at runtime, continue past the first
+relevant function until the path reaches the observable operation or the
+system boundary that controls it. Resolve intermediate indirection rather than
+compressing it into a conceptual arrow, including when applicable:
+
+- framework accessors, registries, service-name lookups, dependency injection,
+  dynamic dispatch, and adapter or wrapper methods;
+- the object or value selected at each lookup and where that object came from;
+- command construction, subprocess creation, namespace entry, transport calls,
+  persistence, or external API boundaries;
+- the return path when it changes the caller's behavior or the final result.
+
+Represent the result as a synthesized invocation chain whose hops use precise
+runtime verbs:
+
+```text
+entry()
+  -> looks up service_name in the current runtime map
+ServiceEnvironment.exec()
+  -> delegates the command to
+Container.exec()
+  -> enters the target execution context and starts
+subprocess / protocol operation
+  -> produces
+observable effect
+```
+
+For every retained hop, attach the implementation excerpt that proves the edge,
+or mark the hop as inferred and name the missing evidence. A citation to only
+the first and last function is not an end-to-end trace. Keep an invocation
+chain distinct from a causal chain: the former proves how execution travels;
+the latter explains why those operations produce the observed outcome.
+
+### 6. Control Branching
 
 When several outgoing edges are available:
 
@@ -88,7 +124,7 @@ When several outgoing edges are available:
 Explore a second branch only when the first branch is disproved, incomplete, or
 insufficient to distinguish competing explanations.
 
-### 6. Handle Dead Ends And Loops
+### 7. Handle Dead Ends And Loops
 
 If a path stops producing evidence, mark the dead end and return to the last
 supported branch point. If the path revisits a node, state what new question or
@@ -96,7 +132,7 @@ evidence justifies the revisit.
 
 Do not silently jump to an unrelated path.
 
-### 7. Stop At A Decision-Relevant Node
+### 8. Stop At A Decision-Relevant Node
 
 Stop navigation when the path has located enough evidence to support the
 scenario's next decision, or when remaining routes cannot be distinguished with
@@ -115,6 +151,8 @@ Navigation question:
 Path:
   node A --relationship/evidence--> node B
   node B --relationship/evidence--> node C
+Concrete execution chain:
+Evidence per hop:
 Excluded branches:
 Dead ends:
 Current answer:
@@ -140,7 +178,11 @@ The module is complete when:
 
 1. the entry point is tied to the goal;
 2. every retained transition has a named relationship and evidence;
-3. the reason for choosing each next node is explicit;
-4. excluded branches and dead ends are accounted for when material;
-5. the path stops for a stated decision-relevant reason;
-6. facts and inferred links remain distinguishable.
+3. concrete runtime claims are traced through dynamic lookup, wrappers, and
+   execution boundaries to an observable effect;
+4. every implementation-specific hop has a source anchor or explicit evidence
+   gap;
+5. the reason for choosing each next node is explicit;
+6. excluded branches and dead ends are accounted for when material;
+7. the path stops for a stated decision-relevant reason;
+8. facts and inferred links remain distinguishable.

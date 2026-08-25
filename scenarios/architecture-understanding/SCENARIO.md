@@ -33,8 +33,9 @@ Apply these rules:
   Transitions, Explain Why It Matters, Stay Goal-Relevant, Maintain Zoom
   Coherence.
 - [Explanation rules](../../rules/explanation-rules.md): Introduce Terms In
-  Plain Language, Prefer Causal Relationships, Preserve Causal Order,
-  Distinguish Fact From Inference, Cite Original Evidence.
+  Plain Language, Make Quantitative Reasoning Executable, Prefer Causal
+  Relationships, Preserve Causal Order, Distinguish Fact From Inference, Cite
+  Original Evidence.
 
 ## Inputs
 
@@ -77,6 +78,9 @@ Mark disagreement rather than silently choosing one source.
 
 **Evidence gate:** architecture claims must be tied to intended-design evidence,
 actual-system evidence, or labeled inference before they enter the model.
+Claims about what a runtime path does or does not do require implementation,
+deployed-configuration, or runtime evidence when available; documentation alone
+establishes intent, not actual behavior.
 
 ### 3. Apply Architecture Top-Down Levels
 
@@ -115,6 +119,14 @@ each transition and explain why the next component participates.
 Show synchronous versus asynchronous boundaries, persistence points, trust
 boundaries, and ownership changes when relevant.
 
+For each concrete code path used to support an architectural conclusion, trace
+the invocation through framework accessors, registries or named-object lookups,
+adapter and wrapper methods, process or namespace transitions, and transport or
+storage operations until it reaches the observable effect or relevant system
+boundary. Bind every implementation-specific hop to the source excerpt that
+proves it; do not cite only the entry function and summarize the intermediate
+runtime machinery.
+
 ### 6. Explain Architectural Causes And Tradeoffs
 
 Connect constraints to design decisions and consequences:
@@ -138,6 +150,10 @@ Identify implementation anchors only after the architectural model is clear.
 Reconnect components and flows to the original architectural question. Explain
 what the model supports confidently, where intended and actual architecture
 diverge, and which evidence would resolve remaining uncertainty.
+
+Define every architecture or operating-system term that carries causal weight
+by stating its plain-language role, mechanism, controlled capability, effect on
+the traced flow, and relevance to the conclusion.
 
 ## Allowed Iteration
 
@@ -167,9 +183,12 @@ The final response must make recoverable:
 
 - the architectural question, system purpose, and chosen boundary;
 - relevant actors, components, responsibilities, and contracts;
-- critical flows with labeled transitions;
+- critical flows with labeled transitions, including an end-to-end invocation
+  chain and implementation evidence per hop for concrete runtime behavior;
 - state, data, control, trust, or failure boundaries when material;
 - constraints, design decisions, benefits, costs, and risks;
+- operational definitions for specialized terms whose mechanisms affect the
+  conclusion;
 - important invariants and change coupling;
 - intended-versus-actual differences;
 - implementation anchors, evidence sources, and unresolved uncertainty.
@@ -182,8 +201,12 @@ Before finishing, confirm:
 
 1. the system boundary matches the question;
 2. responsibilities are supported by contracts or behavior;
-3. critical flows explain transitions and ownership changes;
-4. constraints are connected to design consequences;
-5. documented and inferred rationale are distinguishable;
-6. intended and actual architecture are not conflated;
-7. the human can reason about the impact of a relevant change using the model.
+3. concrete critical flows resolve runtime indirection and reach an observable
+   operation or relevant system boundary with evidence for every retained hop;
+4. implementation and negative behavioral claims do not rely on documentation
+   alone when stronger evidence is available;
+5. specialized terms explain both mechanism and effect in the current flow;
+6. constraints are connected to design consequences;
+7. documented and inferred rationale are distinguishable;
+8. intended and actual architecture are not conflated;
+9. the human can reason about the impact of a relevant change using the model.

@@ -66,7 +66,15 @@ Before finishing, check that the human can recover:
 - where it sits in the larger system;
 - why the relevant path was followed;
 - how the important parts connect;
+- how concrete runtime behavior travels through lookup, dispatch, wrappers, and
+  execution boundaries to its observable effect;
+- what specialized terms do, what capability they control, and why they matter
+  in the current path;
+- what each quantitative symbol and unit means, why the stated relationship
+  holds, and whether each condition is derived, evidence-backed, or assumed;
 - what evidence supports the conclusion;
+- which claims are proven by implementation, configuration, runtime evidence,
+  documentation, or labeled inference;
 - what remains unknown or outside scope;
 - what was verified and with what result.
 

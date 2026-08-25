@@ -35,10 +35,10 @@ Apply these rules:
   Establish Context First, Progressive Disclosure.
 - [Navigation rules](../../rules/navigation-rules.md): Explain Non-Obvious
   Transitions, Explain Why It Matters, Stay Goal-Relevant.
-- [Explanation rules](../../rules/explanation-rules.md): Prefer Causal
-  Relationships, Preserve Causal Order, Distinguish Fact From Inference,
-  Cite Original Evidence, Explain Change Before Action, Verify Before Claiming
-  Success.
+- [Explanation rules](../../rules/explanation-rules.md): Make Quantitative
+  Reasoning Executable, Prefer Causal Relationships, Preserve Causal Order,
+  Distinguish Fact From Inference, Cite Original Evidence, Explain Change
+  Before Action, Verify Before Claiming Success.
 
 ## Inputs
 
@@ -73,6 +73,12 @@ Start from the observed entry point and follow only supported control, data,
 state, or configuration edges. Explain why each file, component, or function is
 the next relevant node. Record material dead ends and excluded branches.
 
+Before editing, capture a source anchor for every implementation-specific hop
+retained in the path: the smallest decisive pre-change excerpt, its precise
+location, and the relationship it proves. If the repair will remove or rewrite
+that excerpt, retain a revision or diff location from which the original can
+still be recovered.
+
 ### 3. Establish Root Cause
 
 Connect the violated expectation to the mechanism that produces the symptom.
@@ -81,7 +87,9 @@ surfaces. Challenge the explanation against plausible alternatives.
 
 **Cause gate:** implementation may change only after evidence supports a causal
 chain and identifies the violated responsibility or invariant. A plausible
-location is not enough.
+location or a synthesized flow is not enough; the faulty condition and failure
+boundary must be traceable to original source anchors, or the missing evidence
+must remain explicit.
 
 ### 4. Choose The Repair Boundary
 
@@ -119,7 +127,10 @@ symptom -> relevant path -> root cause -> repair boundary -> change -> verificat
 ```
 
 Keep evidence adjacent to the claim it supports and reconnect local changes to
-the observed defect.
+the observed defect. At the first statement of what the original implementation
+did, show its pre-change source anchor. At the first statement of how the repair
+changes that behavior, show the post-change source anchor. A causal chain or
+pseudocode summary may connect those anchors, but must not replace them.
 
 ## Allowed Iteration
 
@@ -151,6 +162,9 @@ The final response must make recoverable:
 
 - the defect and its system location;
 - the relevant path and reason for each non-obvious transition;
+- verbatim source anchors for the faulty condition, failure boundary, and
+  repaired path, each with a precise file and line range plus a revision or
+  diff identifier when the excerpt is not in current source;
 - the supported root cause;
 - why this repair boundary was chosen;
 - the concrete change and intended impact;
@@ -165,8 +179,12 @@ Before finishing, confirm:
 
 1. observed and expected behavior are distinct and evidenced;
 2. the symptom location is not confused with the cause;
-3. each retained path transition has a reason;
-4. the repair restores an explicit invariant at the correct boundary;
-5. unrelated changes were not introduced;
-6. verification supports the success language;
-7. the human can restate why the defect occurred and why the change fixes it.
+3. each implementation-specific causal step is bound at first use to a
+   verbatim source anchor and precise location;
+4. synthesized flow or pseudocode is labeled and does not substitute for
+   original evidence;
+5. each retained path transition has a reason;
+6. the repair restores an explicit invariant at the correct boundary;
+7. unrelated changes were not introduced;
+8. verification supports the success language;
+9. the human can restate why the defect occurred and why the change fixes it.
