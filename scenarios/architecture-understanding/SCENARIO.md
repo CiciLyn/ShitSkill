@@ -30,8 +30,8 @@ Apply these rules:
 - [Context rules](../../rules/context-rules.md): Assume Limited Human Context,
   Establish Context First, Progressive Disclosure.
 - [Navigation rules](../../rules/navigation-rules.md): Explain Non-Obvious
-  Transitions, Explain Why It Matters, Stay Goal-Relevant, Maintain Zoom
-  Coherence.
+  Transitions, Ground Relationships In One Concrete Scenario, Explain Why It
+  Matters, Stay Goal-Relevant, Maintain Zoom Coherence.
 - [Explanation rules](../../rules/explanation-rules.md): Introduce Terms In
   Plain Language, Make Quantitative Reasoning Executable, Prefer Causal
   Relationships, Preserve Causal Order, Distinguish Fact From Inference, Cite
@@ -115,6 +115,11 @@ Do not infer responsibility from component names alone.
 
 Choose representative user, data, control, deployment, or failure flows. Label
 each transition and explain why the next component participates.
+
+Before generalizing the architecture, instantiate one representative trigger
+with concrete runtime values. Carry the same example through lookup, object
+construction, dispatch, execution, output, and cleanup so the human does not
+have to infer how separately described components connect.
 
 Show synchronous versus asynchronous boundaries, persistence points, trust
 boundaries, and ownership changes when relevant.

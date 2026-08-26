@@ -66,6 +66,8 @@ Before finishing, check that the human can recover:
 - where it sits in the larger system;
 - why the relevant path was followed;
 - how the important parts connect;
+- how one representative trigger moves concrete values through those parts,
+  including what is temporary, persistent, and cleaned up;
 - how concrete runtime behavior travels through lookup, dispatch, wrappers, and
   execution boundaries to its observable effect;
 - what specialized terms do, what capability they control, and why they matter

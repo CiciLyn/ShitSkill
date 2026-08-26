@@ -138,7 +138,23 @@ wrapper delegates next, which execution context is entered, and which command,
 request, write, or return value creates the observable effect. Keep the chain
 compact, but do not replace it with a citation to only the entry function.
 
-### 7. Bind Source-Dependent Claims To Evidence
+### 7. Instantiate One Representative Run
+
+When the human asks how several components work together, choose one concrete
+trigger and carry it through the full path before giving a
+component-by-component summary. At each handoff, name:
+
+- the caller and callee;
+- the actual runtime object, key, path, or state being transferred;
+- why the callee is selected;
+- what persistent or observable effect proves the handoff occurred;
+- what is temporary, what survives, and who owns cleanup.
+
+Use values from the current run when available. If only a hypothetical example
+is possible, label it as hypothetical. Do not make the human mentally compose
+an execution path from separate component descriptions.
+
+### 8. Bind Source-Dependent Claims To Evidence
 
 When a claim depends on concrete source behavior, bind it at first use to a
 source anchor containing:
@@ -187,7 +203,7 @@ Show the decisive lines from that range, identify them as original source, and
 then explain which values move into the command. The visible response need not
 use a fixed template.
 
-### 8. Control Cognitive Load
+### 9. Control Cognitive Load
 
 Group related details under one claim, keep evidence adjacent to that claim,
 and omit irrelevant branches. When an omitted branch is an obvious alternative,
@@ -196,7 +212,7 @@ state briefly why it does not matter.
 Use examples only when they resolve an abstraction or demonstrate a
 relationship; examples must not become a second unexplained system.
 
-### 9. Close The Loop
+### 10. Close The Loop
 
 End by reconnecting local details to the original goal. State:
 
@@ -216,6 +232,7 @@ Goal:
 Entry point:
 Conceptual spine:
 Key relationships:
+Representative trigger and concrete values:
 Invocation chain and evidence per hop:
 Terms to expand:
 Quantitative quantities, symbols, and units:
@@ -245,8 +262,8 @@ The module is complete when:
 
 1. the entry point establishes enough context for the first detail;
 2. every important transition has an explicit relationship and reason;
-3. concrete runtime behavior is shown through the established invocation chain
-   to its observable effect or relevant boundary;
+3. concrete runtime behavior is shown through one representative run and the
+   established invocation chain to its observable effect or relevant boundary;
 4. unfamiliar terms include their mechanism, operational effect, and relevance
    at first meaningful use;
 5. every material equation is preceded by a plain-language mechanism, defines

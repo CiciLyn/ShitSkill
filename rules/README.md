@@ -10,8 +10,8 @@ belong in `modules/`, while task-specific ordering belongs in `scenarios/`.
 
 - [Context rules](context-rules.md): human context, initial orientation, and
   progressive disclosure.
-- [Navigation rules](navigation-rules.md): transitions, importance, relevant
-  scope, and coherent zoom levels.
+- [Navigation rules](navigation-rules.md): transitions, representative runtime
+  scenarios, importance, relevant scope, and coherent zoom levels.
 - [Explanation rules](explanation-rules.md): terminology, accessible
   mathematics, causality, evidence, epistemic status, source citation, change
   intent, and verification.
