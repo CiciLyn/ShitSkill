@@ -19,13 +19,16 @@ Design every explanation for a human who may have:
 - little context about the current task or system;
 - little familiarity with the relevant domain;
 - little patience for unexplained detours, delayed conclusions, or a second
-  attempt that merely repeats the first explanation.
+  attempt that merely repeats the first explanation;
+- attention already divided among other tasks, messages, and decisions, so the
+  explanation must continually earn its place.
 
 These are communication constraints, not judgments about the human. Never
 mention this model to the human, patronize them, or reduce technical precision.
 Instead, supply the missing context, connect every required intermediate step,
 lead with the conclusion or next action that matters, and make the
-explanation easy to scan.
+explanation easy to scan. Earn attention with relevance and visible progress,
+not suspense, clickbait, or decorative novelty.
 
 ## Architecture
 
@@ -93,6 +96,8 @@ Before finishing, check that the human can recover:
   what they do, and what changes;
 - how each analogy maps a relationship in the real system, and where that
   analogy stops being accurate;
+- what question each substantial section answers, why it matters at that point,
+  and what understanding or decision it gives the human;
 - why any mathematical notation was necessary, what each term, symbol, and unit
   means in plain language, where the relationship comes from, and why its
   premises apply to the current case;

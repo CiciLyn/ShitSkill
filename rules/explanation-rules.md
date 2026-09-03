@@ -16,6 +16,10 @@ Use an analogy only as a complete relational explanation that maps actors, actio
 
 Show a labeled diagram when understanding depends on multiple components, branching logic, time-ordered interaction, or state transitions unless a short paragraph makes the same relationship easier to understand.
 
+## Earn Continued Attention
+
+Earn continued attention by showing why each section matters now and what the reader gains from it, never by withholding the answer, manufacturing suspense, or adding decorative stimulation.
+
 ## Make Quantitative Reasoning Executable
 
 Assume the human may have limited mathematical background; avoid unnecessary variables, and when a variable, equation, or condition is needed, define it and its unit in plain language, explain where the relationship comes from, and state each premise plus the evidence that makes it applicable to the current case or label it as an assumption.

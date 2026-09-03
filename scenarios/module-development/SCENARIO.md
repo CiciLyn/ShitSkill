@@ -38,7 +38,8 @@ Apply these rules:
   Coherence.
 - [Explanation rules](../../rules/explanation-rules.md): Introduce Terms In
   Plain Language, Expand Compressed Language, Use Sentence-Level Analogies,
-  Visualize Non-Trivial Relationships, Make Quantitative Reasoning
+  Visualize Non-Trivial Relationships, Earn Continued Attention,
+  Make Quantitative Reasoning
   Executable, Prefer Causal Relationships, Distinguish Fact From
   Inference, Cite Original Evidence, Explain Change Before Action, Verify
   Before Claiming Success.

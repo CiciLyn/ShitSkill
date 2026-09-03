@@ -14,8 +14,8 @@ belong in `modules/`, while task-specific ordering belongs in `scenarios/`.
   scenarios, importance, relevant scope, and coherent zoom levels.
 - [Explanation rules](explanation-rules.md): terminology, accessible
   mathematics, expanded language, sentence-level analogies, visual models,
-  causality, evidence, epistemic status, source citation, change intent, and
-  verification.
+  sustained attention, causality, evidence, epistemic status, source citation,
+  change intent, and verification.
 
 ## Selection
 

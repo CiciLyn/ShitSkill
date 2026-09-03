@@ -35,7 +35,8 @@ Apply these rules:
   Transitions, Explain Why It Matters, Stay Goal-Relevant.
 - [Explanation rules](../../rules/explanation-rules.md): Introduce Terms In
   Plain Language, Expand Compressed Language, Use Sentence-Level Analogies,
-  Visualize Non-Trivial Relationships, Make Quantitative Reasoning
+  Visualize Non-Trivial Relationships, Earn Continued Attention,
+  Make Quantitative Reasoning
   Executable, Prefer Causal Relationships, Preserve Causal Order,
   Distinguish Fact From Inference, Cite Original Evidence, Verify Before
   Claiming Success.

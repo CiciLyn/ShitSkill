@@ -66,8 +66,9 @@ Context`, `Assume No Prerequisite Knowledge`, `Respect Limited Patience`,
 
 Every scenario must also select `Introduce Terms In Plain Language`, `Expand
 Compressed Language`, `Use Sentence-Level Analogies`, and `Visualize
-Non-Trivial Relationships`; a scenario may omit an analogy or visual only when
-the corresponding rule's applicability condition is not met.
+Non-Trivial Relationships`, and `Earn Continued Attention`; a scenario may
+omit an analogy or visual only when the corresponding rule's applicability
+condition is not met.
 
 ## Status
 

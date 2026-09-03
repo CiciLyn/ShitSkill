@@ -18,6 +18,8 @@ does not establish truth, choose the task workflow, or replace missing evidence.
   runtime behavior is being explained.
 - Important relationships and transitions.
 - The outcome or decision the explanation must support.
+- Competing demands on the human's attention and the earliest point at which
+  they gain something useful.
 
 If the mental model is incomplete, report the missing input instead of hiding
 the gap with polished prose.
@@ -65,7 +67,46 @@ Move through these information layers only as needed:
 Each layer must make the next layer easier to understand. Stop descending when
 additional detail no longer changes the human's decision or mental model.
 
-### 4. Expand Compressed Meaning
+### 4. Earn And Re-Earn Attention
+
+Treat attention as conditional, not as something the explanation owns after the
+first sentence. Every substantial section must make three things clear:
+
+- the question this section answers;
+- why that question matters at this point in the explanation;
+- what new understanding, evidence, prediction, or decision the human gains.
+
+The visible response does not need to label these three points, but the reader
+must be able to see that their understanding is increasing. Give a useful
+result before asking for more effort. When a dense technical passage is
+necessary, first state what it will establish, then reconnect its result to the
+original goal immediately afterward.
+
+Do not confuse brevity with attention. Missing context forces the reader to do
+extra reconstruction work, so keep necessary context and place it immediately
+before the detail that needs it.
+
+Use headings, concrete examples, representative runs, and visuals when they
+reduce the effort required to see relevance or progress. Do not use them as
+decoration.
+
+Before finishing, check whether the writing keeps earning attention:
+
+1. Does the opening reveal the answer, current state, or next useful question?
+2. Does each section show why it belongs before presenting its detail?
+3. Does each section change the human's understanding, confidence, or action?
+4. Can a paragraph be removed without weakening the explanation? If so, remove
+   it.
+5. Is a section's useful result delayed until its end? If so, move enough of
+   that result forward to justify the reading effort.
+6. After dense detail, is the human re-anchored to the goal and the progress
+   just made?
+
+Never manufacture suspense, hide the answer to force continued reading, use
+clickbait, or add novelty that does not improve understanding. Attention should
+be earned by relevance and cumulative progress.
+
+### 5. Expand Compressed Meaning
 
 When an unfamiliar term first matters, explain it in this order:
 
@@ -104,7 +145,7 @@ changes which service a command reaches. Likewise, naming a device path or
 forwarding flag is not enough: explain what operation consumes it and what
 specific path becomes unavailable when it is absent or disabled.
 
-### 5. Use Sentence-Level Analogies
+### 6. Use Sentence-Level Analogies
 
 Use an analogy when it makes an unfamiliar relationship easier to simulate
 mentally. The analogy must be a short explanation, not a decorative noun:
@@ -130,7 +171,7 @@ Prefer a sentence-level analogy such as:
 An analogy explains a relationship; it is never evidence that the real
 mechanism behaves that way.
 
-### 6. Explain Mathematics Accessibly
+### 7. Explain Mathematics Accessibly
 
 Assume the human may have little mathematical background. Keep precise
 mathematical terms when they are useful, but explain them in plain language at
@@ -162,7 +203,7 @@ When a new variable, equation, or mathematical condition is necessary:
 Do not treat notation, a named theorem, or a formula as a substitute for the
 plain-language explanation that lets the human reconstruct the reasoning.
 
-### 7. Explain Relationships, Not Just Objects
+### 8. Explain Relationships, Not Just Objects
 
 For every non-obvious move from one item to another, state:
 
@@ -180,7 +221,7 @@ wrapper delegates next, which execution context is entered, and which command,
 request, write, or return value creates the observable effect. Keep the chain
 compact, but do not replace it with a citation to only the entry function.
 
-### 8. Present The Visual Model
+### 9. Present The Visual Model
 
 When the established mental model contains a non-trivial structure, branch,
 interaction sequence, or state change, present its visual model near the first
@@ -198,7 +239,7 @@ more than `shutdown coordination`. A visual may compress layout, but it must
 not compress meaning. Do not make the human infer unlabeled arrows, unexplained
 abbreviations, or the difference between observed and hypothetical edges.
 
-### 9. Instantiate One Representative Run
+### 10. Instantiate One Representative Run
 
 When the human asks how several components work together, choose one concrete
 trigger and carry it through the full path before giving a
@@ -214,7 +255,7 @@ Use values from the current run when available. If only a hypothetical example
 is possible, label it as hypothetical. Do not make the human mentally compose
 an execution path from separate component descriptions.
 
-### 10. Bind Source-Dependent Claims To Evidence
+### 11. Bind Source-Dependent Claims To Evidence
 
 When a claim depends on concrete source behavior, bind it at first use to a
 source anchor containing:
@@ -263,7 +304,7 @@ Show the decisive lines from that range, identify them as original source, and
 then explain which values move into the command. The visible response need not
 use a fixed template.
 
-### 11. Control Cognitive Load
+### 12. Control Cognitive Load
 
 Group related details under one claim, keep evidence adjacent to that claim,
 and omit irrelevant branches. When an omitted branch is an obvious alternative,
@@ -277,7 +318,7 @@ unknown terms or reconstruct a missing transition. Rewrite the sentence or add
 the missing relationship. Do not respond to likely confusion by repeating the
 same compressed wording.
 
-### 12. Close The Loop
+### 13. Close The Loop
 
 End by reconnecting local details to the original goal. State:
 
@@ -298,6 +339,9 @@ Goal:
 Entry point:
 Conceptual spine:
 Key relationships:
+What the reader gains near the opening:
+What the reader gains from each substantial section:
+Content to remove or move:
 Visual model and takeaway:
 Representative trigger and concrete values:
 Invocation chain and evidence per hop:
@@ -355,4 +399,7 @@ The module is complete when:
 13. synthesized flows and pseudocode are distinguishable from original source;
 14. details appear in a coherent progression rather than as disconnected facts;
 15. the conclusion reconnects evidence and impact to the original goal;
-16. facts, inferences, unknowns, and verification status remain distinguishable.
+16. facts, inferences, unknowns, and verification status remain distinguishable;
+17. every substantial section earns continued attention through immediate
+    relevance, visible progress, or a concrete gain without withholding the
+    answer, removing necessary context, or adding decorative stimulation.
