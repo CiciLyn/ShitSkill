@@ -60,6 +60,15 @@ Every scenario must select `Cite Original Evidence`.
 Any scenario that permits code, configuration, data, or external-state changes
 must select `Explain Change Before Action`.
 
+Every scenario must select the complete reader model: `Assume Minimal Human
+Context`, `Assume No Prerequisite Knowledge`, `Respect Limited Patience`,
+`Establish Context First`, and `Progressive Disclosure`.
+
+Every scenario must also select `Introduce Terms In Plain Language`, `Expand
+Compressed Language`, `Use Sentence-Level Analogies`, and `Visualize
+Non-Trivial Relationships`; a scenario may omit an analogy or visual only when
+the corresponding rule's applicability condition is not met.
+
 ## Status
 
 All first-version scenario workflows are implemented. New scenarios must

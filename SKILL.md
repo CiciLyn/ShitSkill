@@ -1,6 +1,6 @@
 ---
 name: "shit-skill"
-description: "Builds evidence-backed mental models. Invoke when users ask to understand or explain why/how code, a codebase, architecture, documents, failures, debugging evidence, or causal relationships work."
+description: "Builds evidence-backed mental models for low-context, impatient readers. Invoke to explain code, architecture, documents, failures, debugging evidence, or causal relationships."
 ---
 
 # Shit Skill
@@ -11,6 +11,21 @@ understandable.
 
 The skill communicates decision-relevant rationale and evidence. It does not
 expose hidden chain-of-thought.
+
+## Reader Model
+
+Design every explanation for a human who may have:
+
+- little context about the current task or system;
+- little familiarity with the relevant domain;
+- little patience for unexplained detours, delayed conclusions, or a second
+  attempt that merely repeats the first explanation.
+
+These are communication constraints, not judgments about the human. Never
+mention this model to the human, patronize them, or reduce technical precision.
+Instead, supply the missing context, connect every required intermediate step,
+lead with the conclusion or next action that matters, and make the
+explanation easy to scan.
 
 ## Architecture
 
@@ -66,12 +81,18 @@ Before finishing, check that the human can recover:
 - where it sits in the larger system;
 - why the relevant path was followed;
 - how the important parts connect;
+- which visual model shows a non-trivial structure, flow, sequence, or state
+  change, and what conclusion the human should read from it;
 - how one representative trigger moves concrete values through those parts,
   including what is temporary, persistent, and cleaned up;
 - how concrete runtime behavior travels through lookup, dispatch, wrappers, and
   execution boundaries to its observable effect;
 - what specialized terms do, what capability they control, and why they matter
   in the current path;
+- how compressed phrases were expanded into complete statements that name who acts,
+  what they do, and what changes;
+- how each analogy maps a relationship in the real system, and where that
+  analogy stops being accurate;
 - why any mathematical notation was necessary, what each term, symbol, and unit
   means in plain language, where the relationship comes from, and why its
   premises apply to the current case;

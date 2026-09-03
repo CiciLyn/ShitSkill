@@ -2,8 +2,8 @@
 
 ## Purpose
 
-Turn an established mental model into an explanation that a lower-context human
-can follow, verify, and reuse.
+Turn an established mental model into an explanation for a human who may have
+little context, little familiarity with the domain, and little patience.
 
 This module determines **how to communicate what is already understood**. It
 does not establish truth, choose the task workflow, or replace missing evidence.
@@ -11,7 +11,7 @@ does not establish truth, choose the task workflow, or replace missing evidence.
 ## Inputs
 
 - A goal-relevant mental model.
-- The human's demonstrated context and requested depth.
+- The human's demonstrated context, domain familiarity, and requested depth.
 - Facts, inferences, unknowns, and supporting evidence.
 - Precise locations and verbatim excerpts for source-dependent claims.
 - Complete invocation paths and evidence for each retained hop when concrete
@@ -29,11 +29,13 @@ the gap with polished prose.
 Begin with the smallest orientation that makes the remaining explanation
 meaningful:
 
-- the question or outcome;
+- the question and direct answer or current outcome;
 - the system location;
 - the central conclusion, when already supported.
 
-Do not begin with a deep implementation detail or unexplained terminology.
+Do not delay the useful point with ceremony, a deep implementation detail, or
+unexplained terminology. If a detour is required before the answer, say what
+question the detour resolves and why the answer depends on it.
 
 ### 2. Choose A Conceptual Spine
 
@@ -81,6 +83,20 @@ after its meaning has been established. Treat kernel facilities, protocol
 features, namespace types, device paths, configuration fields, and error-class
 names as terms when the explanation depends on their behavior.
 
+Compressed language also includes abbreviations, stacked nouns, invented
+compound labels, nounified verbs, and metaphorical labels. Expand these into a
+complete relationship before using the short form:
+
+```text
+actor -> action -> object -> immediate result -> why that result matters
+```
+
+For example, `runtime boundary ownership mismatch` forces the human to unpack
+four nouns without knowing the claim. Prefer: `The worker creates the resource,
+but the controller tries to delete it. Because the controller does not own that
+resource, cleanup fails.` The shorter label may be introduced afterward if it
+will be reused.
+
 For example, explaining that a network namespace is isolated is incomplete
 unless the human also learns that it gives processes a separate set of
 interfaces, routes, loopback endpoints, and firewall tables, and therefore
@@ -88,7 +104,33 @@ changes which service a command reaches. Likewise, naming a device path or
 forwarding flag is not enough: explain what operation consumes it and what
 specific path becomes unavailable when it is absent or disabled.
 
-### 5. Explain Mathematics Accessibly
+### 5. Use Sentence-Level Analogies
+
+Use an analogy when it makes an unfamiliar relationship easier to simulate
+mentally. The analogy must be a short explanation, not a decorative noun:
+
+1. State the unfamiliar mechanism.
+2. Give a familiar situation with actors, actions, and consequences.
+3. Map each relevant part of the familiar situation back to the real system.
+4. State where the comparison stops being accurate.
+5. Return to the precise technical term.
+
+Avoid word-level analogies such as `the registry is a phonebook` or `the adapter
+is glue`. They leave the human to invent the missing relationships and often
+smuggle in false behavior.
+
+Prefer a sentence-level analogy such as:
+
+> A service registry works like a hotel front desk for named services: the
+> caller asks for `billing`, the registry returns the service object currently
+> assigned to that name, and the caller then invokes that object. Unlike a
+> human receptionist, the registry follows exact registration and lookup rules;
+> it does not decide which service is best.
+
+An analogy explains a relationship; it is never evidence that the real
+mechanism behaves that way.
+
+### 6. Explain Mathematics Accessibly
 
 Assume the human may have little mathematical background. Keep precise
 mathematical terms when they are useful, but explain them in plain language at
@@ -120,7 +162,7 @@ When a new variable, equation, or mathematical condition is necessary:
 Do not treat notation, a named theorem, or a formula as a substitute for the
 plain-language explanation that lets the human reconstruct the reasoning.
 
-### 6. Explain Relationships, Not Just Objects
+### 7. Explain Relationships, Not Just Objects
 
 For every non-obvious move from one item to another, state:
 
@@ -138,7 +180,25 @@ wrapper delegates next, which execution context is entered, and which command,
 request, write, or return value creates the observable effect. Keep the chain
 compact, but do not replace it with a citation to only the entry function.
 
-### 7. Instantiate One Representative Run
+### 8. Present The Visual Model
+
+When the established mental model contains a non-trivial structure, branch,
+interaction sequence, or state change, present its visual model near the first
+explanation that depends on it.
+
+Use this order:
+
+1. one sentence naming the question the visual answers;
+2. the Mermaid, ASCII, or tabular visual;
+3. one sentence stating its main takeaway;
+4. the evidence and detail needed to trust that takeaway.
+
+Keep labels concrete and verbal: `controller asks worker to stop` communicates
+more than `shutdown coordination`. A visual may compress layout, but it must
+not compress meaning. Do not make the human infer unlabeled arrows, unexplained
+abbreviations, or the difference between observed and hypothetical edges.
+
+### 9. Instantiate One Representative Run
 
 When the human asks how several components work together, choose one concrete
 trigger and carry it through the full path before giving a
@@ -154,7 +214,7 @@ Use values from the current run when available. If only a hypothetical example
 is possible, label it as hypothetical. Do not make the human mentally compose
 an execution path from separate component descriptions.
 
-### 8. Bind Source-Dependent Claims To Evidence
+### 10. Bind Source-Dependent Claims To Evidence
 
 When a claim depends on concrete source behavior, bind it at first use to a
 source anchor containing:
@@ -203,7 +263,7 @@ Show the decisive lines from that range, identify them as original source, and
 then explain which values move into the command. The visible response need not
 use a fixed template.
 
-### 9. Control Cognitive Load
+### 11. Control Cognitive Load
 
 Group related details under one claim, keep evidence adjacent to that claim,
 and omit irrelevant branches. When an omitted branch is an obvious alternative,
@@ -212,7 +272,12 @@ state briefly why it does not matter.
 Use examples only when they resolve an abstraction or demonstrate a
 relationship; examples must not become a second unexplained system.
 
-### 10. Close The Loop
+Before finishing, scan for sentences that require the human to unpack several
+unknown terms or reconstruct a missing transition. Rewrite the sentence or add
+the missing relationship. Do not respond to likely confusion by repeating the
+same compressed wording.
+
+### 12. Close The Loop
 
 End by reconnecting local details to the original goal. State:
 
@@ -228,13 +293,17 @@ artifact:
 
 ```text
 Human context:
+Reader assumptions still requiring support:
 Goal:
 Entry point:
 Conceptual spine:
 Key relationships:
+Visual model and takeaway:
 Representative trigger and concrete values:
 Invocation chain and evidence per hop:
 Terms to expand:
+Compressed phrases to rewrite:
+Analogy mapping and limit:
 Quantitative quantities, symbols, and units:
 Quantitative mechanism and assumptions:
 Condition provenance and failure cases:
@@ -260,23 +329,30 @@ This module does not:
 
 The module is complete when:
 
-1. the entry point establishes enough context for the first detail;
+1. the entry point gives the conclusion or next action that matters without
+   requiring hidden context or unnecessary patience;
 2. every important transition has an explicit relationship and reason;
 3. concrete runtime behavior is shown through one representative run and the
    established invocation chain to its observable effect or relevant boundary;
 4. unfamiliar terms include their mechanism, operational effect, and relevance
    at first meaningful use;
-5. every material equation is preceded by a plain-language mechanism, defines
+5. compressed phrases have been expanded into complete statements that name
+   who acts, what they do, and what changes before their short forms are reused;
+6. every analogy maps a complete relationship, names its limit, and remains
+   distinct from evidence about the real system;
+7. every non-trivial relationship has a readable visual model near its first
+   use, or a specific reason why prose is clearer;
+8. every material equation is preceded by a plain-language mechanism, defines
    every symbol and unit, and returns its result to the concrete quantity being
    explained;
-6. every quantitative condition is identified as evidence, derivation, or
+9. every quantitative condition is identified as evidence, derivation, or
    assumption, with the step that needs it and the consequence if it fails;
-7. population quantities, observed values, and estimates are not conflated;
-8. every source-dependent claim has a nearby verbatim excerpt and precise
+10. population quantities, observed values, and estimates are not conflated;
+11. every source-dependent claim has a nearby verbatim excerpt and precise
    location, or an explicit evidence gap;
-9. behavioral and negative claims use implementation or runtime evidence when
+12. behavioral and negative claims use implementation or runtime evidence when
    available instead of relying on documentation alone;
-10. synthesized flows and pseudocode are distinguishable from original source;
-11. details appear in a coherent progression rather than as disconnected facts;
-12. the conclusion reconnects evidence and impact to the original goal;
-13. facts, inferences, unknowns, and verification status remain distinguishable.
+13. synthesized flows and pseudocode are distinguishable from original source;
+14. details appear in a coherent progression rather than as disconnected facts;
+15. the conclusion reconnects evidence and impact to the original goal;
+16. facts, inferences, unknowns, and verification status remain distinguishable.

@@ -58,24 +58,41 @@ store
 Use only the dimensions that matter: control, data, state, responsibility, or
 causality.
 
-### 4. Draw When Relationships Are Non-Trivial
+### 4. Externalize Non-Trivial Relationships
+
+Default to a visual model when the human would otherwise need to hold several
+relationships in working memory. Draw when the target includes any of these:
+
+- more than two components with different responsibilities;
+- a branch, fallback, retry, or causal fork;
+- interactions whose order changes the result;
+- lifecycle states or transitions;
+- boundaries that determine who can read, write, call, or clean up.
 
 | Representation | Use for |
 | --- | --- |
-| ASCII / Markdown | A short linear path or small hierarchy. |
-| Mermaid `flowchart` | Components, dependencies, control flow, or branches. |
-| Mermaid `sequenceDiagram` | Time-ordered interactions between actors. |
-| Mermaid `stateDiagram-v2` | Lifecycle and state transitions. |
+| ASCII | Short paths when rendering is uncertain. |
+| Mermaid `flowchart` | Components, control flow, causes, or branches. |
+| Mermaid `sequenceDiagram` | Ordered calls, messages, and returns. |
+| Mermaid `stateDiagram-v2` | States and transition triggers. |
+| Table | Comparisons without position or time. |
 
 A useful diagram:
 
 - contains only goal-relevant nodes;
-- labels edges with meaningful verbs;
+- labels edges with plain-language actions rather than compressed nouns;
 - makes the target and boundary visible;
 - distinguishes uncertain relationships;
+- remains readable without zooming into implementation trivia;
 - includes one sentence stating its main takeaway.
 
-Do not draw a diagram when prose is clearer.
+Introduce the question that the visual answers, render the visual, then state
+the conclusion the human should take from it. The visual reduces mental
+assembly; it does not replace definitions, evidence, or causal explanation.
+
+Omit a diagram only when the relationship is genuinely simpler as prose. When
+Mermaid rendering is unavailable, preserve the same relationships with ASCII
+instead of dropping the visual model.
 
 ### 5. Apply The Predictive Check
 
@@ -94,7 +111,7 @@ Scenario-selected model:
 Relevant parts and responsibilities:
 Labeled relationships:
 Boundary:
-Diagram, when useful:
+Visual model, or reason omitted:
 Prediction:
 Evidence gaps:
 ```
@@ -104,10 +121,12 @@ Populate only relevant fields.
 ## Boundaries
 
 Do not select the model, inspect the whole system, prove causal claims,
-prescribe a scenario workflow, require a diagram, or dictate the final
-explanation format.
+prescribe a scenario workflow, force a diagram when no visual trigger exists,
+or dictate the final explanation format.
 
 ## Quality Gate
 
 The human can locate the target, explain the relevant responsibilities and
-relationships, trace the important behavior, and predict the next outcome.
+relationships, trace the important behavior, and predict the next outcome;
+non-trivial relationships are externalized in a labeled visual model or have a
+specific reason why prose is clearer.

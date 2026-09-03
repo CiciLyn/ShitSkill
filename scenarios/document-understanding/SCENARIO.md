@@ -25,14 +25,17 @@ Read and apply these modules in workflow order:
 
 Apply these rules:
 
-- [Context rules](../../rules/context-rules.md): Assume Limited Human Context,
-  Establish Context First, Progressive Disclosure.
+- [Context rules](../../rules/context-rules.md): Assume Minimal Human Context,
+  Assume No Prerequisite Knowledge, Respect Limited Patience, Establish Context
+  First, Progressive Disclosure.
 - [Navigation rules](../../rules/navigation-rules.md): Explain Non-Obvious
   Transitions, Explain Why It Matters, Stay Goal-Relevant, Maintain Zoom
   Coherence.
 - [Explanation rules](../../rules/explanation-rules.md): Introduce Terms In
-  Plain Language, Make Quantitative Reasoning Executable, Prefer Causal
-  Relationships, Preserve Causal Order, Distinguish Fact From Inference, Cite
+  Plain Language, Expand Compressed Language, Use Sentence-Level Analogies,
+  Visualize Non-Trivial Relationships, Make Quantitative Reasoning
+  Executable, Prefer Causal Relationships, Preserve Causal Order,
+  Distinguish Fact From Inference, Cite
   Original Evidence.
 
 ## Inputs

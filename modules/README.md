@@ -7,8 +7,8 @@ quality checks. It must remain independent of any one task scenario.
 
 | Module | Responsibility | Status |
 | --- | --- | --- |
-| [`better-understanding`](better-understanding/MODULE.md) | Build a goal-relevant mental model for a human with limited context. | Implemented |
-| [`better-explanation`](better-explanation/MODULE.md) | Turn an established mental model into a clear, progressively disclosed explanation. | Implemented |
+| [`better-understanding`](better-understanding/MODULE.md) | Build a goal-relevant mental model and externalize non-trivial relationships visually. | Implemented |
+| [`better-explanation`](better-explanation/MODULE.md) | Explain clearly for a reader who has little context, domain knowledge, or patience. | Implemented |
 | [`top-down`](top-down/MODULE.md) | Descend from the highest relevant abstraction to implementation detail without losing orientation. | Implemented |
 | [`path-navigation`](path-navigation/MODULE.md) | Trace and explain meaningful transitions across artifacts, components, and abstraction levels. | Implemented |
 | [`causal-reasoning`](causal-reasoning/MODULE.md) | Connect observations, causes, decisions, actions, and consequences with evidence. | Implemented |
@@ -23,6 +23,10 @@ quality checks. It must remain independent of any one task scenario.
   method; each scenario selects the primitives required by its task.
 - Progressive disclosure remains a rule. `better-explanation` defines a
   reusable method for applying it.
+- Visual-model construction belongs to `better-understanding`; presentation,
+  labeling, and explanation of that model belong to `better-explanation`.
+- Sentence-level analogy is an explanation method, not a source of evidence or
+  a substitute for the real mechanism.
 - `top-down` is a reusable module, while each scenario decides what its levels
   mean and when to descend.
 - Goal-oriented ordering belongs to scenario workflows rather than a generic

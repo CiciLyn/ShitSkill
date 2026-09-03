@@ -1,8 +1,16 @@
 # Context Rules
 
-## Assume Limited Human Context
+## Assume Minimal Human Context
 
-Assume the human has less task context than you unless they demonstrate otherwise.
+Assume the human has little task context unless they demonstrate otherwise.
+
+## Assume No Prerequisite Knowledge
+
+Assume no domain terminology, architecture, mathematics, or local convention is already understood unless the human has demonstrated it.
+
+## Respect Limited Patience
+
+Lead with the conclusion or next action that matters, and make every detour earn the attention it costs.
 
 ## Establish Context First
 
