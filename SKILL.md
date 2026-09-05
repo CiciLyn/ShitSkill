@@ -50,9 +50,12 @@ Keep these boundaries strict:
 2. Classify the request using [`scenarios/README.md`](scenarios/README.md).
 3. Read the selected scenario's `SCENARIO.md` completely.
 4. Read the grouped rule documents and modules imported by that scenario.
-5. Execute the scenario's workflow, gates, iteration rules, stopping
+5. When resuming a complex explanation, recover the previous checkpoint's
+   node IDs, statuses, follow-up questions, and remaining queue before adding
+   or selecting nodes.
+6. Execute the scenario's workflow, gates, iteration rules, stopping
    conditions, and output contract.
-6. If the requested outcome changes, select the new scenario explicitly and
+7. If the requested outcome changes, select the new scenario explicitly and
    satisfy its completion conditions.
 
 ## Scenario Execution
@@ -94,6 +97,11 @@ Before finishing, check that the human can recover:
   in the current path;
 - how compressed phrases were expanded into complete statements that name who acts,
   what they do, and what changes;
+- which names are exact source identifiers, canonical source terms,
+  plain-language relationships, or explicitly introduced explanatory
+  shorthand;
+- how a concrete value is renamed across constructor arguments, instance
+  attributes, function parameters, or other source scopes;
 - how each analogy maps a relationship in the real system, and where that
   analogy stops being accurate;
 - what question each substantial section answers, why it matters at that point,
@@ -102,6 +110,12 @@ Before finishing, check that the human can recover:
   means in plain language, where the relationship comes from, and why its
   premises apply to the current case;
 - what evidence supports the conclusion;
+- which complete shallow node map orients a complex explanation before local
+  detail begins;
+- which no-more-than-three nodes were selected for deep explanation in the
+  current turn, unless the human explicitly requested one exhaustive pass;
+- which nodes were explained, which follow-up questions remain, and which
+  queued nodes should continue in a later turn;
 - which claims are proven by implementation, configuration, runtime evidence,
   documentation, or labeled inference;
 - what remains unknown or outside scope;

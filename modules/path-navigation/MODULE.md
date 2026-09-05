@@ -77,6 +77,20 @@ Question answered:
 Do not merely explain what the destination does. Explain why reaching it
 advances the current goal.
 
+When an object or value crosses the transition under a different source
+identifier, record both exact names and the operation connecting them:
+
+```text
+caller: self.config_path
+  -- passed positionally to -->
+callee: load_config(config_path)
+  -- referenced in the callee as -->
+config_path
+```
+
+Do not use one identifier while citing lines whose scope contains only the
+other identifier.
+
 ### 5. Complete Concrete Execution Paths
 
 When the claim concerns what code does at runtime, continue past the first
@@ -111,6 +125,11 @@ or mark the hop as inferred and name the missing evidence. A citation to only
 the first and last function is not an end-to-end trace. Keep an invocation
 chain distinct from a causal chain: the former proves how execution travels;
 the latter explains why those operations produce the observed outcome.
+
+**Depth evidence gate:** before descending to another helper, file, process, or
+service, verify that every retained hop at the current depth has its own source
+anchor and exact identifier mapping. If not, repair the ledger or stop at the
+gap; do not let citations disappear as the explanation gets deeper.
 
 ### 6. Control Branching
 
@@ -152,6 +171,7 @@ Path:
   node A --relationship/evidence--> node B
   node B --relationship/evidence--> node C
 Concrete execution chain:
+Identifier mappings:
 Evidence per hop:
 Excluded branches:
 Dead ends:

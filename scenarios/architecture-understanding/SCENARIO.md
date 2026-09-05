@@ -21,9 +21,10 @@ Read and apply these modules in workflow order:
 
 1. [`better-understanding`](../../modules/better-understanding/MODULE.md)
 2. [`top-down`](../../modules/top-down/MODULE.md)
-3. [`path-navigation`](../../modules/path-navigation/MODULE.md)
-4. [`causal-reasoning`](../../modules/causal-reasoning/MODULE.md)
-5. [`better-explanation`](../../modules/better-explanation/MODULE.md)
+3. [`breadth-depth-explanation`](../../modules/breadth-depth-explanation/MODULE.md)
+4. [`path-navigation`](../../modules/path-navigation/MODULE.md)
+5. [`causal-reasoning`](../../modules/causal-reasoning/MODULE.md)
+6. [`better-explanation`](../../modules/better-explanation/MODULE.md)
 
 Apply these rules:
 
@@ -32,14 +33,16 @@ Apply these rules:
   First, Progressive Disclosure.
 - [Navigation rules](../../rules/navigation-rules.md): Explain Non-Obvious
   Transitions, Ground Relationships In One Concrete Scenario, Explain Why It
-  Matters, Stay Goal-Relevant, Maintain Zoom Coherence.
+  Matters, Stay Goal-Relevant, Map Breadth Before Depth, Maintain Zoom
+  Coherence, Limit Deep-Dive Nodes Per Turn, Preserve Explanation State,
+  Maintain Evidence Through Depth.
 - [Explanation rules](../../rules/explanation-rules.md): Introduce Terms In
-  Plain Language, Expand Compressed Language, Use Sentence-Level Analogies,
-  Visualize Non-Trivial Relationships, Earn Continued Attention,
-  Make Quantitative Reasoning
-  Executable, Prefer Causal Relationships, Preserve Causal Order,
-  Distinguish Fact From Inference, Cite
-  Original Evidence.
+  Plain Language, Expand Compressed Language, Preserve Source Identifiers,
+  Label Explanatory Names, Declare Identifier Remapping, Use Sentence-Level
+  Analogies, Visualize Non-Trivial Relationships, Earn Continued Attention,
+  Make Quantitative Reasoning Executable, Prefer Causal Relationships,
+  Preserve Causal Order, Distinguish Fact From Inference, Cite Original
+  Evidence.
 
 ## Inputs
 
@@ -103,7 +106,21 @@ system purpose and external actors
 
 Select only levels and branches needed for the architectural question.
 
-### 4. Map Responsibilities And Boundaries
+### 4. Build The Explanation Breadth Map
+
+Apply `breadth-depth-explanation` to the selected architectural branches before
+tracing local mechanisms. Include every goal-relevant component, contract,
+critical flow, invariant, or tradeoff at shallow depth, and preserve exact
+source identifiers and canonical system terms.
+
+Select no more than three active nodes for this response unless the human
+explicitly requests one exhaustive pass. Keep all other nodes in the visible
+queue.
+
+**Breadth gate:** do not begin a deep architectural explanation until the
+complete goal-relevant shallow map and this turn's active nodes are explicit.
+
+### 5. Map Responsibilities And Boundaries
 
 For each relevant component, explain:
 
@@ -115,7 +132,7 @@ For each relevant component, explain:
 
 Do not infer responsibility from component names alone.
 
-### 5. Trace Critical Flows
+### 6. Trace Critical Flows
 
 Choose representative user, data, control, deployment, or failure flows. Label
 each transition and explain why the next component participates.
@@ -134,9 +151,10 @@ adapter and wrapper methods, process or namespace transitions, and transport or
 storage operations until it reaches the observable effect or relevant system
 boundary. Bind every implementation-specific hop to the source excerpt that
 proves it; do not cite only the entry function and summarize the intermediate
-runtime machinery.
+runtime machinery. Deeply trace only the active nodes for this turn, but do not
+cap the source depth required to complete any selected node.
 
-### 6. Explain Architectural Causes And Tradeoffs
+### 7. Explain Architectural Causes And Tradeoffs
 
 Connect constraints to design decisions and consequences:
 
@@ -147,14 +165,14 @@ constraint -> design decision -> gained property -> accepted cost or risk
 Distinguish documented rationale from inferred rationale. Challenge claimed
 benefits against actual implementation evidence.
 
-### 7. Identify Invariants And Change Pressure
+### 8. Identify Invariants And Change Pressure
 
 State which contracts or properties must remain stable, where failures are
 contained or propagated, and which components are likely to change together.
 
 Identify implementation anchors only after the architectural model is clear.
 
-### 8. Synthesize The Model
+### 9. Synthesize The Model
 
 Reconnect components and flows to the original architectural question. Explain
 what the model supports confidently, where intended and actual architecture
@@ -164,18 +182,28 @@ Define every architecture or operating-system term that carries causal weight
 by stating its plain-language role, mechanism, controlled capability, effect on
 the traced flow, and relevance to the conclusion.
 
+When queued nodes remain, close with the visible checkpoint from
+`breadth-depth-explanation` instead of continuing into another deep-dive group.
+
 ## Allowed Iteration
 
 - Runtime evidence may revise a document-derived component or flow.
 - A critical path may cross the initial boundary; expand it only enough to
   explain the observed contract or consequence.
 - Revisit a component when a newly discovered invariant changes its role.
+- A follow-up about an active node may deepen that node without consuming a
+  queued node.
 - Do not enumerate every service, endpoint, or table unless the question
   requires exhaustive inventory.
 
 ## Stopping Conditions
 
-Complete when the human can:
+The current explanation turn is complete when the selected active nodes reach
+their responsibility or observable-effect boundary, every retained hop keeps
+its evidence, and explained, follow-up, and remaining nodes are visible.
+
+The whole topic is complete when no goal-relevant nodes remain queued and the
+human can:
 
 - state the system boundary and purpose;
 - assign relevant responsibilities to components;
@@ -191,16 +219,19 @@ inaccessible and competing system models cannot be reconciled.
 The final response must make recoverable:
 
 - the architectural question, system purpose, and chosen boundary;
+- the complete shallow breadth map and the active nodes selected for this turn;
 - relevant actors, components, responsibilities, and contracts;
 - critical flows with labeled transitions, including an end-to-end invocation
   chain and implementation evidence per hop for concrete runtime behavior;
+- exact source identifiers and explicit mappings where values change names;
 - state, data, control, trust, or failure boundaries when material;
 - constraints, design decisions, benefits, costs, and risks;
 - operational definitions for specialized terms whose mechanisms affect the
   conclusion;
 - important invariants and change coupling;
 - intended-versus-actual differences;
-- implementation anchors, evidence sources, and unresolved uncertainty.
+- implementation anchors, evidence sources, unresolved uncertainty, and a
+  continuation checkpoint when nodes remain.
 
 This is a content contract, not a fixed architecture document template.
 
@@ -218,4 +249,9 @@ Before finishing, confirm:
 6. constraints are connected to design consequences;
 7. documented and inferred rationale are distinguishable;
 8. intended and actual architecture are not conflated;
-9. the human can reason about the impact of a relevant change using the model.
+9. no more than three nodes received deep treatment unless the human requested
+   an exhaustive pass;
+10. exact source identifiers and evidence survive every retained deep hop;
+11. the remaining explanation queue is visible when the whole topic is not yet
+    complete;
+12. the human can reason about the impact of a relevant change using the model.

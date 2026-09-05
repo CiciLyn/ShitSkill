@@ -21,8 +21,9 @@ Read and apply these modules in workflow order:
 
 1. [`better-understanding`](../../modules/better-understanding/MODULE.md)
 2. [`top-down`](../../modules/top-down/MODULE.md)
-3. [`path-navigation`](../../modules/path-navigation/MODULE.md)
-4. [`better-explanation`](../../modules/better-explanation/MODULE.md)
+3. [`breadth-depth-explanation`](../../modules/breadth-depth-explanation/MODULE.md)
+4. [`path-navigation`](../../modules/path-navigation/MODULE.md)
+5. [`better-explanation`](../../modules/better-explanation/MODULE.md)
 
 Apply these rules:
 
@@ -31,12 +32,14 @@ Apply these rules:
   First, Progressive Disclosure.
 - [Navigation rules](../../rules/navigation-rules.md): Explain Non-Obvious
   Transitions, Explain Why It Matters, Stay Goal-Relevant, Maintain Zoom
-  Coherence.
+  Coherence, Map Breadth Before Depth, Limit Deep-Dive Nodes Per Turn,
+  Preserve Explanation State, Maintain Evidence Through Depth.
 - [Explanation rules](../../rules/explanation-rules.md): Introduce Terms In
-  Plain Language, Expand Compressed Language, Use Sentence-Level Analogies,
-  Visualize Non-Trivial Relationships, Earn Continued Attention,
-  Make Quantitative Reasoning
-  Executable, Prefer Causal Relationships, Distinguish Fact From Inference, Cite Original Evidence.
+  Plain Language, Expand Compressed Language, Preserve Source Identifiers,
+  Label Explanatory Names, Declare Identifier Remapping, Use Sentence-Level
+  Analogies, Visualize Non-Trivial Relationships, Earn Continued Attention,
+  Make Quantitative Reasoning Executable, Prefer Causal Relationships,
+  Distinguish Fact From Inference, Cite Original Evidence.
 
 ## Inputs
 
@@ -89,16 +92,32 @@ repository purpose
 Do not descend every branch. At each level, explain which branch matters to the
 goal and which siblings can remain background context.
 
-### 4. Trace Representative Paths
+### 4. Build The Explanation Breadth Map
+
+Apply `breadth-depth-explanation` to the structural inventory before tracing
+local mechanisms. The map must contain every goal-relevant node at shallow
+depth, preserve exact source identifiers, and make the unexplained queue
+visible.
+
+Select no more than three active nodes for the current response unless the
+human explicitly requests one exhaustive pass. Keep the remaining nodes queued
+rather than giving every component equal depth.
+
+**Breadth gate:** do not begin a deep path until the complete goal-relevant
+shallow map and the active nodes for this turn are explicit.
+
+### 5. Trace Representative Paths
 
 Select the smallest set of paths that demonstrates how the relevant behavior
 works. Start from a real entry point and label transitions using control, data,
 state, configuration, or ownership relationships.
 
 Explain why each destination is visited. Do not substitute a list of files for
-an execution model.
+an execution model. Deeply trace only the active nodes for this turn, while
+allowing each selected node to reach the required observable effect or
+responsibility boundary.
 
-### 5. Identify Boundaries And Extension Points
+### 6. Identify Boundaries And Extension Points
 
 Explain:
 
@@ -110,16 +129,18 @@ Explain:
 
 Mention architectural uncertainty when observed code and documentation differ.
 
-### 6. Stop At Useful Depth
+### 7. Stop At Useful Depth
 
 Descend into functions only when their mechanisms change the human's
 understanding or next action. Re-anchor local details to their component and
 repository responsibility.
 
-**Depth gate:** stop when the human can locate the relevant path and predict
-where a goal-related change or investigation belongs.
+**Depth gate:** for each active node, stop when the human can locate the
+relevant path and predict where a goal-related change or investigation belongs.
+Every retained source hop must still have its own source anchor and any
+cross-scope identifier mapping.
 
-### 7. Synthesize The Mental Model
+### 8. Synthesize The Mental Model
 
 Communicate the repository as a connected model:
 
@@ -128,19 +149,28 @@ purpose -> responsibilities -> relevant path -> implementation anchors -> next a
 ```
 
 Include ignored areas and why they are not currently important.
+When queued nodes remain, end with the visible checkpoint from
+`breadth-depth-explanation`; do not silently continue into another group.
 
 ## Allowed Iteration
 
 - A discovered runtime edge may revise the component map.
 - A misleading directory or stale document must be corrected using stronger
   source evidence.
+- A follow-up about an active node may deepen that node without consuming a
+  queued node.
 - Expand to another path only when the first cannot explain a required
   behavior or boundary.
 - Do not continue reading files merely to increase coverage.
 
 ## Stopping Conditions
 
-Complete when the human can:
+The current explanation turn is complete when the selected active nodes have
+reached useful depth, their evidence is intact, and explained, follow-up, and
+remaining nodes are visible.
+
+The whole topic is complete when no goal-relevant nodes remain queued and the
+human can:
 
 - state the repository's purpose;
 - name the major relevant responsibilities and boundaries;
@@ -156,12 +186,14 @@ missing the entry points required to support a reliable model.
 The final response must make recoverable:
 
 - a one-sentence repository purpose;
+- the complete shallow breadth map and the active nodes selected for this turn;
 - the important components and responsibilities;
 - why selected components matter to the goal;
 - one or more labeled execution or data paths;
+- exact source identifiers and explicit mappings where values change names;
 - key files, contracts, and implementation anchors;
 - areas intentionally not explored and why;
-- unknowns, contradictions, and the recommended next starting point.
+- unknowns, contradictions, and a continuation checkpoint when nodes remain.
 
 This is a content contract, not a fixed section template.
 
@@ -175,4 +207,10 @@ Before finishing, confirm:
 4. transitions explain relationships, not only destinations;
 5. irrelevant siblings are bounded rather than described equally;
 6. local implementation is reconnected to repository purpose;
-7. the human could navigate the relevant code without repeating the full exploration.
+7. no more than three nodes received deep treatment unless the human requested
+   an exhaustive pass;
+8. exact source identifiers and evidence survive every retained deep hop;
+9. the remaining explanation queue is visible when the whole topic is not yet
+   complete;
+10. the human could navigate the relevant code without repeating the full
+    exploration.

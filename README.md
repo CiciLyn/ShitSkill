@@ -170,7 +170,9 @@ Verify and report with source references
 
 - 我们在解决什么？
 - 为什么要走这条路径？
+- 完整的浅层节点图是什么，这一轮只深入哪几个节点？
 - 这些组件是怎么连接的？
+- 源码标识符是否保持原样，跨作用域改名是否明确写出？
 - 哪张逻辑框图、时序图或状态图能让我不用在脑中拼装这些关系？
 - 一个真实请求经过每个组件时，具体传了什么对象和值，哪些内容是临时的、哪些会保留？
 - 具体运行时调用经过了哪些查找、分发、wrapper 和进程或 namespace 边界？
@@ -184,16 +186,51 @@ Verify and report with source references
 - 结论依据是实现代码、部署配置、运行观测，还是仅仅是设计文档？
 - 做完以后验证了什么？
 
+## BFS + DFS 解释模式
+
+复杂理解任务先做 breadth-first map，再做 depth-first explanation：
+
+```text
+完整的目标相关浅层节点图
+  -> 选择当前最重要的最多三个节点
+  -> 每个节点沿真实调用或逻辑路径深入到底
+  -> 记录已解释、待追问和剩余节点
+  -> 下一轮从同一队列继续
+```
+
+这里的 BFS 和 DFS 只控制用户看到解释的顺序，不限制 Agent 在内部读取
+多少文件，也不允许它为了凑“三个节点”而截断一条真实调用链。一个节点可以
+深入任意层，但每个源码跳转都必须继续带着原始证据。
+
+源码里的名字不能被“说人话”顺手改掉。值在不同作用域中改名时，应明确写成：
+
+```text
+llm_proxy_source_root
+  -> stored as
+self.llm_proxy_source_root
+  -> passed to the context manager as
+source_root
+```
+
+这三个都是各自作用域中的真实标识符，不应被压成一个看似方便、实际并不存在
+于所有源码位置的名字。普通解释可以另起一个简称，但必须明确说明它是解释者
+定义的简称，不能伪装成源码标识符。
+
+只有一个简单节点的问题可以省略显式节点图。用户明确要求一次讲完时可以超过
+三个深挖节点，但仍然要先给全景图、保留原名，并让每个深层跳转都有证据。
+
 ## 🧰 已实现内容
 
 ### Rules
 
-[22 条原子规则](rules/README.md)，覆盖：
+[29 条原子规则](rules/README.md)，覆盖：
 
 - 低上下文、不了解领域、低耐心的默认读者模型；
 - 上下文建立、注意力赢得与渐进披露；
 - 跳转理由、具体运行场景、范围与抽象层级；
+- 先广后深、每轮节点预算、跨轮解释状态与深层证据连续性；
 - 术语展开、句子级比喻和非平凡关系可视化；
+- 源码标识符保真、解释性简称标注与跨作用域改名映射；
 - 因果关系和事实边界；
 - 原文及代码行引用；
 - 改动前解释；
@@ -203,6 +240,8 @@ Verify and report with source references
 
 - [`better-understanding`](modules/better-understanding/MODULE.md): 建立可被人脑执行和预测的 mental model，
   并把复杂关系画出来。
+- [`breadth-depth-explanation`](modules/breadth-depth-explanation/MODULE.md):
+  先列完整浅层节点图，再让每轮最多三个节点深入到底，并保留跨轮队列。
 - [`better-explanation`](modules/better-explanation/MODULE.md): 把术语、压缩表达和比喻展开成低上下文读者能跟随的解释。
 - [`top-down`](modules/top-down/MODULE.md): 从相关的高层结构逐步下钻到实现。
 - [`path-navigation`](modules/path-navigation/MODULE.md): 解释为什么从一个节点走到下一个节点。

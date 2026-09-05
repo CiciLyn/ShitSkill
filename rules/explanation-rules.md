@@ -8,6 +8,18 @@ Keep precise technical terms when they are useful, but before relying on a term 
 
 Rewrite jargon, abbreviations, stacked nouns, coined shorthand, and noun-like labels as complete clauses that name the actor, action, object, and consequence before reusing a shorter term.
 
+## Preserve Source Identifiers
+
+Preserve the exact spelling and scope of source identifiers, and never present a paraphrase or inferred label in code formatting as though it appeared in the source.
+
+## Label Explanatory Names
+
+Introduce any useful explanatory shorthand explicitly as a locally defined label and keep it visually distinct from source identifiers and canonical source terms.
+
+## Declare Identifier Remapping
+
+When one value is stored, passed, or rebound under a different identifier, show the exact source-to-destination name mapping before reasoning across that boundary.
+
 ## Use Sentence-Level Analogies
 
 Use an analogy only as a complete relational explanation that maps actors, actions, and consequences to the real system and states where the mapping stops, never as a metaphorical word that replaces the mechanism.

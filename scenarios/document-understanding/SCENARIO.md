@@ -21,7 +21,8 @@ Read and apply these modules in workflow order:
 
 1. [`better-understanding`](../../modules/better-understanding/MODULE.md)
 2. [`top-down`](../../modules/top-down/MODULE.md)
-3. [`better-explanation`](../../modules/better-explanation/MODULE.md)
+3. [`breadth-depth-explanation`](../../modules/breadth-depth-explanation/MODULE.md)
+4. [`better-explanation`](../../modules/better-explanation/MODULE.md)
 
 Apply these rules:
 
@@ -30,14 +31,15 @@ Apply these rules:
   First, Progressive Disclosure.
 - [Navigation rules](../../rules/navigation-rules.md): Explain Non-Obvious
   Transitions, Explain Why It Matters, Stay Goal-Relevant, Maintain Zoom
-  Coherence.
+  Coherence, Map Breadth Before Depth, Limit Deep-Dive Nodes Per Turn,
+  Preserve Explanation State, Maintain Evidence Through Depth.
 - [Explanation rules](../../rules/explanation-rules.md): Introduce Terms In
-  Plain Language, Expand Compressed Language, Use Sentence-Level Analogies,
-  Visualize Non-Trivial Relationships, Earn Continued Attention,
-  Make Quantitative Reasoning
-  Executable, Prefer Causal Relationships, Preserve Causal Order,
-  Distinguish Fact From Inference, Cite
-  Original Evidence.
+  Plain Language, Expand Compressed Language, Preserve Source Identifiers,
+  Label Explanatory Names, Declare Identifier Remapping, Use Sentence-Level
+  Analogies, Visualize Non-Trivial Relationships, Earn Continued Attention,
+  Make Quantitative Reasoning Executable, Prefer Causal Relationships,
+  Preserve Causal Order, Distinguish Fact From Inference, Cite Original
+  Evidence.
 
 ## Inputs
 
@@ -94,13 +96,25 @@ problem and intended outcome
 Skip levels that the document does not contain. Do not force a process document
 into an argument structure or vice versa.
 
-### 4. Build A Concept Map
+### 4. Build The Concept And Explanation Breadth Map
 
 For each essential concept, capture its plain-language role, precise meaning in
 the document, and relation to other concepts. Resolve pronouns, overloaded
 terms, and implied prerequisites that would otherwise break the explanation.
 
 Do not expand terminology unrelated to the human's goal.
+
+Apply `breadth-depth-explanation` to include every goal-relevant concept, claim,
+process step, rationale, and conclusion at shallow depth. Preserve canonical
+document terms and exact source identifiers such as field or parameter names.
+
+Select no more than three active nodes for the current response unless the
+human explicitly requests one exhaustive pass. Keep the remaining nodes in the
+visible queue.
+
+**Breadth gate:** do not deeply reconstruct a concept, mechanism, or argument
+until the complete goal-relevant shallow map and this turn's active nodes are
+explicit.
 
 ### 5. Reconstruct The Logic
 
@@ -118,6 +132,11 @@ it silently.
 must remain traceable to source text or be labeled as inference or external
 context.
 
+Deeply reconstruct only the active nodes for this turn, while allowing each
+selected node to reach its conclusion, output, or applicability boundary.
+Every retained source-dependent step must keep its source anchor and any
+identifier mapping.
+
 ### 6. Explain Rationale And Boundaries
 
 Identify why the proposed model, process, or decision exists; what alternatives
@@ -131,9 +150,14 @@ Reconnect the document's concepts and conclusions to the human's intended use.
 State what must be remembered, what can be looked up later, and which claims
 remain ambiguous or unsupported.
 
+When queued nodes remain, close with the visible checkpoint from
+`breadth-depth-explanation` instead of continuing into another deep-dive group.
+
 ## Allowed Iteration
 
 - Return to a definition when a later section changes its meaning.
+- A follow-up about an active node may deepen that node without consuming a
+  queued node.
 - Consult a referenced source only when the current document depends on it for
   a material claim.
 - Compare another document only when the human requests comparison or a
@@ -142,7 +166,12 @@ remain ambiguous or unsupported.
 
 ## Stopping Conditions
 
-Complete when the human can explain:
+The current explanation turn is complete when the selected active nodes reach
+useful depth, every retained source-dependent step keeps its evidence, and
+explained, follow-up, and remaining nodes are visible.
+
+The whole topic is complete when no goal-relevant nodes remain queued and the
+human can explain:
 
 - the problem and intended outcome;
 - the essential concepts and relationships;
@@ -158,13 +187,16 @@ access are missing and prevent faithful interpretation.
 The final response must make recoverable:
 
 - what the document is trying to accomplish;
+- the complete shallow breadth map and the active nodes selected for this turn;
 - its central model or claim;
 - essential terms in plain language and precise context;
+- exact source identifiers and mappings where the document changes names;
 - relationships and overall flow;
 - rationale, tradeoffs, and applicability boundaries;
 - a concrete example when it materially aids understanding;
 - actionable conclusions and unresolved ambiguities;
-- source location references when available.
+- source location references when available;
+- a continuation checkpoint when nodes remain.
 
 This is a content contract, not a generic summary template.
 
@@ -178,4 +210,9 @@ Before finishing, confirm:
 4. source claims and interpretation remain distinguishable;
 5. examples preserve the source's constraints;
 6. irrelevant sections do not receive equal depth;
-7. the human can state what the document means and how to use it.
+7. no more than three nodes received deep treatment unless the human requested
+   an exhaustive pass;
+8. exact source identifiers and evidence survive every retained deep step;
+9. the remaining explanation queue is visible when the whole topic is not yet
+   complete;
+10. the human can state what the document means and how to use it.

@@ -41,6 +41,14 @@ When a task changes outcome, hand off explicitly. For example, debugging may
 discover a supported cause and then hand off to bug fixing. Do not silently
 blend completion conditions from two scenarios.
 
+`repo-understanding`, `document-understanding`, and
+`architecture-understanding` use an interactive breadth/depth explanation
+lifecycle for complex topics: establish the complete shallow node map, deeply
+explain no more than three selected nodes per turn unless the human requests an
+exhaustive pass, and preserve the remaining queue across turns. This limits
+user-visible explanation breadth, not internal investigation or implementation
+work.
+
 ## Scenario Contract
 
 Each implemented scenario must define:

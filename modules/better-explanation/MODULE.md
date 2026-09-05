@@ -16,6 +16,8 @@ does not establish truth, choose the task workflow, or replace missing evidence.
 - Precise locations and verbatim excerpts for source-dependent claims.
 - Complete invocation paths and evidence for each retained hop when concrete
   runtime behavior is being explained.
+- Exact source identifiers, identifier mappings across scopes, and any
+  explanation checkpoint that must survive into a later turn.
 - Important relationships and transitions.
 - The outcome or decision the explanation must support.
 - Competing demands on the human's attention and the earliest point at which
@@ -144,6 +146,28 @@ interfaces, routes, loopback endpoints, and firewall tables, and therefore
 changes which service a command reaches. Likewise, naming a device path or
 forwarding flag is not enough: explain what operation consumes it and what
 specific path becomes unavailable when it is absent or disabled.
+
+Before paraphrasing source, classify each technical name:
+
+- an exact source identifier keeps its spelling and uses code formatting;
+- a canonical source term keeps the source's spelling and capitalization;
+- a plain-language explanation is written as a complete relationship;
+- a reusable shorthand is explicitly introduced as explanatory shorthand and
+  is not formatted as though it were a source identifier.
+
+When a value changes names across scopes, show the exact mapping before using
+the names in one explanation:
+
+```text
+constructor argument: llm_proxy_source_root
+  -> stored on the instance as
+self.llm_proxy_source_root
+  -> passed to the context manager parameter
+source_root
+```
+
+Do not silently replace all three identifiers with one preferred name. Each
+name is valid only in the source scope where it appears.
 
 ### 6. Use Sentence-Level Analogies
 
@@ -347,12 +371,16 @@ Representative trigger and concrete values:
 Invocation chain and evidence per hop:
 Terms to expand:
 Compressed phrases to rewrite:
+Source-term classifications:
+Identifier mappings:
 Analogy mapping and limit:
 Quantitative quantities, symbols, and units:
 Quantitative mechanism and assumptions:
 Condition provenance and failure cases:
 Evidence placement:
 Source anchors:
+Explained nodes:
+Remaining explanation queue:
 Details to omit:
 Closing loop:
 ```
@@ -403,3 +431,7 @@ The module is complete when:
 17. every substantial section earns continued attention through immediate
     relevance, visible progress, or a concrete gain without withholding the
     answer, removing necessary context, or adding decorative stimulation.
+18. source identifiers remain exact and scoped, explanatory names are visibly
+    labeled, and every cross-scope identifier change is mapped before use;
+19. when the explanation continues across turns, explained nodes and the
+    remaining queue are recoverable without reconstructing the topic.

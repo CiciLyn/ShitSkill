@@ -19,3 +19,19 @@ Do not explore a branch that does not advance the current goal without explainin
 ## Maintain Zoom Coherence
 
 Move from the global picture through the relevant path to local detail and back to the conclusion without unexplained abstraction jumps.
+
+## Map Breadth Before Depth
+
+For a complex understanding request, show the complete goal-relevant shallow node map before deeply explaining any selected node.
+
+## Limit Deep-Dive Nodes Per Turn
+
+Unless the human explicitly requests one exhaustive pass, deeply explain no more than three nodes in one response while allowing each selected node to be traced to any required depth.
+
+## Preserve Explanation State
+
+When unexplained nodes remain, keep a visible checkpoint of explained nodes, follow-up questions, and the remaining queue so a later turn can resume without reconstructing the topic.
+
+## Maintain Evidence Through Depth
+
+Every source-dependent transition retained during a deep explanation must keep an adjacent source anchor or stop at an explicitly named evidence gap.

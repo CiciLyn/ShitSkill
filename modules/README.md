@@ -8,6 +8,7 @@ quality checks. It must remain independent of any one task scenario.
 | Module | Responsibility | Status |
 | --- | --- | --- |
 | [`better-understanding`](better-understanding/MODULE.md) | Build a goal-relevant mental model and externalize non-trivial relationships visually. | Implemented |
+| [`breadth-depth-explanation`](breadth-depth-explanation/MODULE.md) | Map all relevant nodes shallowly, then explain at most three nodes deeply per turn while preserving exact identifiers and the remaining queue. | Implemented |
 | [`better-explanation`](better-explanation/MODULE.md) | Explain clearly and continually earn a low-context reader's attention. | Implemented |
 | [`top-down`](top-down/MODULE.md) | Descend from the highest relevant abstraction to implementation detail without losing orientation. | Implemented |
 | [`path-navigation`](path-navigation/MODULE.md) | Trace and explain meaningful transitions across artifacts, components, and abstraction levels. | Implemented |
@@ -21,6 +22,9 @@ quality checks. It must remain independent of any one task scenario.
   independent lifecycle.
 - `better-understanding` defines the mental-model primitives and construction
   method; each scenario selects the primitives required by its task.
+- `breadth-depth-explanation` owns the per-turn breadth map, active-node budget,
+  identifier mapping, and visible continuation checkpoint; it does not limit
+  internal investigation or implementation.
 - Progressive disclosure remains a rule. `better-explanation` defines a
   reusable method for applying it.
 - Visual-model construction belongs to `better-understanding`; presentation,

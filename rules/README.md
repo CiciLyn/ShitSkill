@@ -11,11 +11,13 @@ belong in `modules/`, while task-specific ordering belongs in `scenarios/`.
 - [Context rules](context-rules.md): human context, prerequisite knowledge, patience, initial orientation, and
   progressive disclosure.
 - [Navigation rules](navigation-rules.md): transitions, representative runtime
-  scenarios, importance, relevant scope, and coherent zoom levels.
+  scenarios, breadth-before-depth pacing, cross-turn explanation state,
+  evidence continuity, relevant scope, and coherent zoom levels.
 - [Explanation rules](explanation-rules.md): terminology, accessible
-  mathematics, expanded language, sentence-level analogies, visual models,
-  sustained attention, causality, evidence, epistemic status, source citation,
-  change intent, and verification.
+  mathematics, expanded language, source-identifier fidelity, explicit name
+  remapping, sentence-level analogies, visual models, sustained attention,
+  causality, evidence, epistemic status, source citation, change intent, and
+  verification.
 
 ## Selection
 
